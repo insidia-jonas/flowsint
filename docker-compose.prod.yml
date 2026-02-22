@@ -14,7 +14,7 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     environment:
-      - SITE_DOMAIN=${SITE_DOMAIN:-osint.inisidia.de}
+      - SITE_DOMAIN=${SITE_DOMAIN:-osint.insidia.de}
     networks:
       - flowsint_network
     depends_on:

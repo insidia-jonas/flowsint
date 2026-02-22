@@ -2,10 +2,10 @@
 # Flowsint — Caddy Reverse Proxy mit automatischem SSL
 # =============================================================================
 # Domain wird über die Umgebungsvariable SITE_DOMAIN gesetzt.
-# Standard: osint.inisidia.de
+# Standard: osint.insidia.de
 # =============================================================================
 
-{$SITE_DOMAIN:osint.inisidia.de} {
+{$SITE_DOMAIN:osint.insidia.de} {
 	# --- API Backend (FastAPI) ------------------------------------------------
 	handle /api/* {
 		reverse_proxy api:5001
