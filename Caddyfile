@@ -5,6 +5,11 @@
 # Standard: osint.insidia.de
 # =============================================================================
 
+# --- Globale Optionen (ACME / Let's Encrypt) ---------------------------------
+{
+	email admin@insidia.de
+}
+
 {$SITE_DOMAIN:osint.insidia.de} {
 	# --- API Backend (FastAPI) ------------------------------------------------
 	handle /api/* {
