@@ -1,0 +1,41 @@
+# =============================================================================
+# Flowsint — Caddy Reverse Proxy mit automatischem SSL
+# =============================================================================
+# Domain wird über die Umgebungsvariable SITE_DOMAIN gesetzt.
+# Standard: osint.inisidia.de
+# =============================================================================
+
+{$SITE_DOMAIN:osint.inisidia.de} {
+	# --- API Backend (FastAPI) ------------------------------------------------
+	handle /api/* {
+		reverse_proxy api:5001
+	}
+
+	# --- Health-Check Endpoint (direkt an API) --------------------------------
+	handle /health {
+		reverse_proxy api:5001
+	}
+
+	# --- Frontend (SPA via Nginx im App-Container) ---------------------------
+	handle {
+		reverse_proxy app:8080
+	}
+
+	# --- Komprimierung --------------------------------------------------------
+	encode gzip zstd
+
+	# --- Security Headers -----------------------------------------------------
+	header {
+		X-Frame-Options "SAMEORIGIN"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+
+	# --- Logging --------------------------------------------------------------
+	log {
+		output stdout
+		format console
+	}
+}
